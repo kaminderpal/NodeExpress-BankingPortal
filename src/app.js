@@ -47,9 +47,7 @@ app.post('/transfer', (req, res) => {
 
   const currentToBalance = accounts[to].balance;
   accounts[to].balance = parseInt(currentToBalance + amount);
-
-  writeJSON(accounts);
-
+  writeJSON();
   res.render('transfer', { message: 'Transfer Completed' });
 });
 
@@ -61,7 +59,7 @@ app.post('/payment', (req, res) => {
   const { amount } = req.body;
   accounts.credit.balance -= amount;
   accounts.credit.available = parseInt(accounts.credit.available + amount);
-  writeJSON(accounts);
+  writeJSON();
   res.render('payment', {
     message: 'Payment Successful',
     account: accounts.credit,
